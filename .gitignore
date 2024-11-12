@@ -70,3 +70,5 @@ Thumbs.db
 *.coveragexml
 *.testResults
 TestResults/
+
+.vs
