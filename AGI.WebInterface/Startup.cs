@@ -12,6 +12,7 @@ using AGI.PlanningEngine;
 using AGI.EthicsAndSafety;
 using AGI.SelfMonitoring;
 using AGI.Adaptation;
+using AGI.APIIntegration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -36,6 +37,7 @@ namespace AGI.WebInterface
             services.AddSingleton<EthicsAndSafetyModule>();
             services.AddSingleton<SelfMonitoringModule>();
             services.AddSingleton<AdaptationModule>();
+            services.AddHttpClient<APIIntegrationService>();
 
             services.AddSwaggerGen(c =>
                 {
