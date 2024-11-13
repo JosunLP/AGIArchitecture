@@ -15,6 +15,8 @@
     <ProjectReference Include="..\AGI.DataManagement\AGI.DataManagement.csproj" />
     <ProjectReference Include="..\AGI.ReasoningEngine\AGI.ReasoningEngine.csproj" />
     <ProjectReference Include="..\AGI.PlanningEngine\AGI.PlanningEngine.csproj" />
+    <ProjectReference Include="..\AGI.EthicsAndSafety\AGI.EthicsAndSafety.csproj" />
+    <ProjectReference Include="..\AGI.SelfMonitoring\AGI.SelfMonitoring.csproj" />
   </ItemGroup>
 
 </Project>
