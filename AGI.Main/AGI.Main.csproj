@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AGI.DataManagement\AGI.DataManagement.csproj" />
+    <ProjectReference Include="..\AGI.ReasoningEngine\AGI.ReasoningEngine.csproj" />
+    <ProjectReference Include="..\AGI.PlanningEngine\AGI.PlanningEngine.csproj" />
   </ItemGroup>
 
 </Project>
