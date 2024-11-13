@@ -37,6 +37,7 @@ namespace AGI.WebInterface
             services.AddSingleton<SelfMonitoringModule>();
             services.AddSingleton<AdaptationModule>();
             services.AddHttpClient<APIIntegrationService>();
+            services.AddHttpClient<ExtendedAPIIntegrationService>();
 
             services.AddSwaggerGen(c =>
                 {

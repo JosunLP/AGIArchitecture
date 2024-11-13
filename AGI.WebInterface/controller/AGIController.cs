@@ -15,33 +15,22 @@ namespace AGI.WebInterface.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AGIController : ControllerBase
+    public class AGIController(
+        DataManager dataManager,
+        MachineLearningService mlService,
+        NLPService nlpService,
+        ReasoningEngine.ReasoningEngine reasoningEngine,
+        PlanningEngine.PlanningEngine planningEngine,
+        EthicsAndSafetyModule ethicsSafetyModule,
+        SelfMonitoringModule selfMonitoringModule) : ControllerBase
     {
-        private readonly DataManager _dataManager;
-        private readonly MachineLearningService _mlService;
-        private readonly NLPService _nlpService;
-        private readonly ReasoningEngine.ReasoningEngine _reasoningEngine;
-        private readonly PlanningEngine.PlanningEngine _planningEngine;
-        private readonly EthicsAndSafetyModule _ethicsSafetyModule;
-        private readonly SelfMonitoringModule _selfMonitoringModule;
-
-        public AGIController(
-            DataManager dataManager,
-            MachineLearningService mlService,
-            NLPService nlpService,
-            ReasoningEngine.ReasoningEngine reasoningEngine,
-            PlanningEngine.PlanningEngine planningEngine,
-            EthicsAndSafetyModule ethicsSafetyModule,
-            SelfMonitoringModule selfMonitoringModule)
-        {
-            _dataManager = dataManager;
-            _mlService = mlService;
-            _nlpService = nlpService;
-            _reasoningEngine = reasoningEngine;
-            _planningEngine = planningEngine;
-            _ethicsSafetyModule = ethicsSafetyModule;
-            _selfMonitoringModule = selfMonitoringModule;
-        }
+        private readonly DataManager _dataManager = dataManager;
+        private readonly MachineLearningService _mlService = mlService;
+        private readonly NLPService _nlpService = nlpService;
+        private readonly ReasoningEngine.ReasoningEngine _reasoningEngine = reasoningEngine;
+        private readonly PlanningEngine.PlanningEngine _planningEngine = planningEngine;
+        private readonly EthicsAndSafetyModule _ethicsSafetyModule = ethicsSafetyModule;
+        private readonly SelfMonitoringModule _selfMonitoringModule = selfMonitoringModule;
 
         // Test Data Setup
         [HttpPost("setup-test-data")]

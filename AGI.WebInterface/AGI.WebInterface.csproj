@@ -20,6 +20,7 @@
     <ProjectReference Include="..\AGI.EthicsAndSafety\AGI.EthicsAndSafety.csproj" />
     <ProjectReference Include="..\AGI.SelfMonitoring\AGI.SelfMonitoring.csproj" />
     <ProjectReference Include="..\AGI.Adaptation\AGI.Adaptation.csproj" />
+    <ProjectReference Include="..\AGI.APIIntegration\AGI.APIIntegration.csproj" />
   </ItemGroup>
 
 </Project>

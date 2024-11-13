@@ -8,16 +8,10 @@ namespace AGI.WebInterface.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AdaptationController : ControllerBase
+    public class AdaptationController(AdaptationModule adaptationModule, SelfMonitoringModule selfMonitoringModule) : ControllerBase
     {
-        private readonly AdaptationModule _adaptationModule;
-        private readonly SelfMonitoringModule _selfMonitoringModule;
-
-        public AdaptationController(AdaptationModule adaptationModule, SelfMonitoringModule selfMonitoringModule)
-        {
-            _adaptationModule = adaptationModule;
-            _selfMonitoringModule = selfMonitoringModule;
-        }
+        private readonly AdaptationModule _adaptationModule = adaptationModule;
+        private readonly SelfMonitoringModule _selfMonitoringModule = selfMonitoringModule;
 
         // Endpoint to list all available adaptation strategies
         [HttpGet("available-strategies")]
