@@ -18,9 +18,7 @@ namespace AGI.Main
                 .BuildServiceProvider();
 
             // Get an instance of the DataManager
-            var dataManager = serviceProvider.GetService<DataManager>();
-
-            // Test adding and retrieving KnowledgeNodes
+            var dataManager = serviceProvider.GetService<DataManager>() ?? throw new InvalidOperationException("DataManager service is not available.");
             await dataManager.AddKnowledgeNodeAsync("AI Basics", "Introduction to AI concepts");
             await dataManager.AddKnowledgeNodeAsync("Machine Learning", "Core concepts of machine learning");
 
