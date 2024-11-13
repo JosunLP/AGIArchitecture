@@ -11,7 +11,9 @@ using AGI.ReasoningEngine;
 using AGI.PlanningEngine;
 using AGI.EthicsAndSafety;
 using AGI.SelfMonitoring;
+using AGI.Adaptation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace AGI.WebInterface
 {
@@ -37,8 +39,13 @@ namespace AGI.WebInterface
             services.AddSingleton<PlanningEngine.PlanningEngine>();
             services.AddSingleton<EthicsAndSafetyModule>();
             services.AddSingleton<SelfMonitoringModule>();
+            services.AddSingleton<AdaptationModule>();
 
-            // Enable controllers
+            services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AGI API", Version = "v1" });
+                });
+
             services.AddControllers();
         }
 
@@ -47,6 +54,12 @@ namespace AGI.WebInterface
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "AGI API V1");
+                    c.RoutePrefix = string.Empty; // Sets Swagger UI at the root of the app
+                });
             }
 
             app.UseRouting();

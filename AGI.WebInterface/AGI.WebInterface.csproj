@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +19,7 @@
     <ProjectReference Include="..\AGI.PlanningEngine\AGI.PlanningEngine.csproj" />
     <ProjectReference Include="..\AGI.EthicsAndSafety\AGI.EthicsAndSafety.csproj" />
     <ProjectReference Include="..\AGI.SelfMonitoring\AGI.SelfMonitoring.csproj" />
+    <ProjectReference Include="..\AGI.Adaptation\AGI.Adaptation.csproj" />
   </ItemGroup>
 
 </Project>
