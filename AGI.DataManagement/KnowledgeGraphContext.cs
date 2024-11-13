@@ -11,33 +11,33 @@ namespace AGI.DataManagement
         public required DbSet<Experience> Experiences { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                // Use an in-memory database for simplicity; replace with SQL Server or other DB if needed.
-                optionsBuilder.UseInMemoryDatabase("KnowledgeGraphDB");
-            }
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Configure relationships and constraints
-            modelBuilder.Entity<KnowledgeNode>().HasKey(k => k.Id);
-            modelBuilder.Entity<Experience>().HasKey(e => e.Id);
+            // Use an in-memory database for simplicity; replace with SQL Server or other DB if needed.
+            optionsBuilder.UseInMemoryDatabase("KnowledgeGraphDB");
         }
     }
 
-    public class KnowledgeNode
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public int Id { get; set; }
-        public required string Name { get; set; }
-        public required string Description { get; set; }
+        // Configure relationships and constraints
+        modelBuilder.Entity<KnowledgeNode>().HasKey(k => k.Id);
+        modelBuilder.Entity<Experience>().HasKey(e => e.Id);
     }
+}
 
-    public class Experience
-    {
-        public int Id { get; set; }
-        public required string Event { get; set; }
-        public DateTime Timestamp { get; set; }
-    }
+public class KnowledgeNode
+{
+    public int Id { get; set; }
+    public required string Name { get; set; }
+    public required string Description { get; set; }
+}
+
+public class Experience
+{
+    public int Id { get; set; }
+    public required string Event { get; set; }
+    public DateTime Timestamp { get; set; }
+}
 }
