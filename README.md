@@ -1,3 +1,4 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/josunlp/agiarchitecture/badge)](https://www.codefactor.io/repository/github/josunlp/agiarchitecture)
 
 # AGI Architecture Project
 
