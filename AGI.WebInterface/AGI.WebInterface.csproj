@@ -11,4 +11,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AGI.DataManagement\AGI.DataManagement.csproj" />
+    <ProjectReference Include="..\AGI.MLServices\AGI.MLServices.csproj" />
+    <ProjectReference Include="..\AGI.NLPServices\AGI.NLPServices.csproj" />
+    <ProjectReference Include="..\AGI.ReasoningEngine\AGI.ReasoningEngine.csproj" />
+    <ProjectReference Include="..\AGI.PlanningEngine\AGI.PlanningEngine.csproj" />
+    <ProjectReference Include="..\AGI.EthicsAndSafety\AGI.EthicsAndSafety.csproj" />
+    <ProjectReference Include="..\AGI.SelfMonitoring\AGI.SelfMonitoring.csproj" />
+  </ItemGroup>
+
 </Project>
