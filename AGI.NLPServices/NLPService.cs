@@ -11,7 +11,7 @@ namespace AGI.NLPServices
         public static List<string> Tokenize(string text)
         {
             // Basic tokenization by splitting on whitespace
-            return [..text.Split(' ', StringSplitOptions.RemoveEmptyEntries)];
+            return [.. text.Split(' ', StringSplitOptions.RemoveEmptyEntries)];
         }
 
         // Count word frequencies in a given text

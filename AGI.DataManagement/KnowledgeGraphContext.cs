@@ -2,15 +2,14 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace AGI.DataManagement
+namespace AGI.DataManagement;
+
+public class KnowledgeGraphContext(DbContextOptions<KnowledgeGraphContext> options) : DbContext(options)
 {
-    public class KnowledgeGraphContext(DbContextOptions<KnowledgeGraphContext> options) : DbContext(options)
-    {
+    public required DbSet<KnowledgeNode> KnowledgeNodes { get; set; }
+    public required DbSet<Experience> Experiences { get; set; }
 
-        public required DbSet<KnowledgeNode> KnowledgeNodes { get; set; }
-        public required DbSet<Experience> Experiences { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
         {
@@ -27,17 +26,3 @@ namespace AGI.DataManagement
     }
 }
 
-public class KnowledgeNode
-{
-    public int Id { get; set; }
-    public required string Name { get; set; }
-    public required string Description { get; set; }
-}
-
-public class Experience
-{
-    public int Id { get; set; }
-    public required string Event { get; set; }
-    public DateTime Timestamp { get; set; }
-}
-}

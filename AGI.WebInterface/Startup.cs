@@ -20,52 +20,51 @@ namespace AGI.WebInterface
 {
     public class Startup(IConfiguration configuration)
     {
-
         public IConfiguration Configuration { get; } = configuration;
 
-    public void ConfigureServices(IServiceCollection services)
-    {
-        // Configure database context (in-memory for demo purposes)
-        services.AddDbContext<KnowledgeGraphContext>(options => options.UseInMemoryDatabase("KnowledgeGraphDB"));
-
-        // Register AGI services
-        services.AddScoped<DataManager>();
-        services.AddSingleton<MachineLearningService>();
-        services.AddSingleton<NLPService>();
-        services.AddSingleton<ReasoningEngine.ReasoningEngine>();
-        services.AddSingleton<PlanningEngine.PlanningEngine>();
-        services.AddSingleton<EthicsAndSafetyModule>();
-        services.AddSingleton<SelfMonitoringModule>();
-        services.AddSingleton<AdaptationModule>();
-        services.AddHttpClient<APIIntegrationService>();
-
-        services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AGI API", Version = "v1" });
-            });
-
-        services.AddControllers();
-    }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
+        public void ConfigureServices(IServiceCollection services)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AGI API V1");
-                c.RoutePrefix = string.Empty; // Sets Swagger UI at the root of the app
+            // Configure database context (in-memory for demo purposes)
+            services.AddDbContext<KnowledgeGraphContext>(options => options.UseInMemoryDatabase("KnowledgeGraphDB"));
+
+            // Register AGI services
+            services.AddScoped<DataManager>();
+            services.AddSingleton<MachineLearningService>();
+            services.AddSingleton<NLPService>();
+            services.AddSingleton<ReasoningEngine.ReasoningEngine>();
+            services.AddSingleton<PlanningEngine.PlanningEngine>();
+            services.AddSingleton<EthicsAndSafetyModule>();
+            services.AddSingleton<SelfMonitoringModule>();
+            services.AddSingleton<AdaptationModule>();
+            services.AddHttpClient<APIIntegrationService>();
+
+            services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AGI API", Version = "v1" });
                 });
+
+            services.AddControllers();
         }
 
-        app.UseRouting();
-
-        app.UseEndpoints(endpoints =>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            endpoints.MapControllers();
-        });
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "AGI API V1");
+                    c.RoutePrefix = string.Empty; // Sets Swagger UI at the root of the app
+                });
+            }
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
     }
-}
 }

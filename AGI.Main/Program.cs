@@ -61,5 +61,4 @@ Console.WriteLine("Logs:");
 foreach (var log in selfMonitoringModule.GetLogs())
 {
     Console.WriteLine(log);
-
 }
