@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.Main", "AGI.Main\AGI.Ma
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AGI.NeuralNetworkModule", "AGI.NeuralNetworkModule", "{13143DA0-709E-44DC-AEEC-8A547D251D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.NeuralNetworkModule", "AGI.NeuralNetworkModule\AGI.NeuralNetworkModule\AGI.NeuralNetworkModule.csproj", "{EB066D91-FEC1-4E24-A421-E602BB9DF040}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.NeuralNetworkModule", "AGI.NeuralNetworkModule\AGI.NeuralNetworkModule.csproj", "{EB066D91-FEC1-4E24-A421-E602BB9DF040}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
