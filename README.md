@@ -1,3 +1,4 @@
+
 [![CodeFactor](https://www.codefactor.io/repository/github/josunlp/agiarchitecture/badge)](https://www.codefactor.io/repository/github/josunlp/agiarchitecture)
 
 # AGI Architecture Project
@@ -8,20 +9,20 @@ Dieses Projekt stellt eine modulare Architektur für eine General Artificial Int
 
 ## Projektstruktur und implementierte Features
 
-- **Data Layer**: Speicherung und Zugriff auf Wissensdaten und Erfahrungen.
-- **Core Services Layer**: Beinhaltet Machine Learning, NLP, Reasoning Engine und Planning Engine.
-- **Intelligence Layer**: Anpassungsmodul für Leistungsoptimierungen und Anomalieerkennung.
+- **Data Layer**: Speicherung und Zugriff auf Wissensdaten und Erfahrungen. Unterstützt durch DataManager und KnowledgeGraph.
+- **Core Services Layer**: Beinhaltet Machine Learning, Reasoning Engine und Planning Engine.
+- **Intelligence Layer**: Anpassungsmodul und Self-Monitoring zur Verhaltensoptimierung.
 - **Ethics and Safety**: Modul zur Regelüberwachung und Sicherheitsprüfung.
-- **Application Layer**: Bereitstellung eines Web-Interfaces und API-Endpunkte, inkl. Swagger-Dokumentation.
+- **Application Layer**: Web-Interface und API, inkl. Swagger-Dokumentation.
 
 ### Features
 
 1. **Data Management**: Verwaltung von strukturierten und unstrukturierten Daten.
 2. **Machine Learning**: Trainings- und Vorhersagemodelle.
-3. **Natural Language Processing**: Tokenisierung und Textverarbeitung.
-4. **Reasoning**: Logik und Inferenz für Wissensverarbeitung.
-5. **Planning**: Zielverwaltung und Priorisierung.
-6. **Adaptation**: Anpassungsstrategien und Überwachung.
+3. **Reasoning**: Wissenslogik und Inferenz.
+4. **Planning**: Zielverwaltung und Priorisierung.
+5. **Adaptation**: Anpassungsstrategien und Überwachung.
+6. **Self-Monitoring**: Protokollierung und Aktivitätsüberwachung.
 7. **Ethics and Safety**: Regel- und Sicherheitsüberwachung.
 8. **Web Interface und API**: API-Zugriff und Visualisierung über Swagger.
 

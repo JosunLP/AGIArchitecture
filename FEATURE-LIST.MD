@@ -10,35 +10,40 @@ Diese Feature-Liste beschreibt die erforderlichen Funktionen für eine General A
 
 ### 1. Data Layer
 - **Data Management**: Verwaltung und Speicherung von strukturierten und unstrukturierten Daten.
-- **Data Access Layer (DAL)**: CRUD-Operationen für Datenzugriff, abstrahiert durch `DataManager`.
+  - Implementiert in: `DataManager.cs`, `KnowledgeGraphContext.cs`, `KnowledgeNode.cs`, `Experience.cs`.
+- **Knowledge Graph**: Unterstützung für Wissensgraphen und Knotenverwaltung.
 
 ### 2. Core Services Layer
-- **Machine Learning Services**: Implementierung einer Basis für Machine Learning, einschließlich Trainings- und Vorhersagemethoden.
-- **Natural Language Processing (NLP)**: Tokenisierung und Textanalyse für Textverarbeitungsanforderungen.
-- **Reasoning Engine**: Wissensverknüpfung, Abfrage und Inferenz innerhalb der AGI.
-- **Planning Engine**: Task- und Zielverwaltung, einschließlich Priorisierung und Abruf von Zielen.
+- **Machine Learning Services**: Basis-ML-Funktionen, einschließlich Vorhersagen und Modellmanagement.
+  - Implementiert in: `MachineLearningService.cs`, `ModelPrediction.cs`.
+- **Reasoning Engine**: Wissenslogik, Abfrage und Inferenz.
+  - Implementiert in: `ReasoningEngine.cs`, `InferenceEngine.cs`.
+- **Planning Engine**: Zielverwaltung und Planungslogik.
+  - Implementiert in: `PlanningEngine.cs`, `Goal.cs`.
 
 ### 3. Intelligence Layer
-- **Adaptation Module**: Anpassungsstrategien, z.B. `OptimizePerformance` und `HandleDataAnomaly`, die auf Ereignisse reagieren und das Verhalten anpassen können.
-- **Self-Monitoring Module**: Protokollierung und Überwachung von Aktivitäten und Anpassungsstrategien.
+- **Adaptation Module**: Anpassungsstrategien und API-Integration.
+  - Implementiert in: `AdaptationModule.cs`, `APIIntegrationService.cs`.
+- **Self-Monitoring Module**: Protokollierung und Überwachung von Aktivitäten und Anpassungen.
+  - Implementiert in: `SelfMonitoringModule.cs`.
 
 ### 4. Ethics and Safety
 - **Ethics and Safety Module**: Verwaltung und Überprüfung von Regeln und Sicherheitsrichtlinien.
 
 ### 5. Application Layer
-- **Web Interface**: ASP.NET Core API, die den Zugriff auf die Funktionen über Endpunkte ermöglicht.
+- **Web Interface**: ASP.NET Core API für Endpunktzugriff.
+  - Implementiert in: `Program.cs`, `Startup.cs`.
 - **API Endpoints**:
-  - Verfügbare Funktionen zur Verwaltung von Wissensknoten, Zielmanagement, Anpassung, Log-Überwachung und Text-Tokenisierung.
-  - Anpassungsstrategien und Überwachungslogs als Endpunkte integriert.
-- **Swagger Dokumentation**: Automatische Dokumentation der API für einfache Visualisierung und Testmöglichkeiten.
+  - Verwaltung von Wissensknoten, Zielmanagement und Anpassungsstrategien.
+  - Überwachungslogs und Text-Tokenisierung.
+- **Swagger Dokumentation**: Automatische API-Dokumentation.
 
 ---
 
 ## Offene Features
 
 ### Erweiterungen für zukünftige Implementierungen
-- **Erweiterte ML-Modelle**: Zusätzliche Machine-Learning-Funktionalität.
-- **Erweiterte Planungsfunktionen**: Fortgeschrittene Zielverfolgung und Managementfunktionen.
-- **Erweiterung der API und Anpassungsstrategien**: Hinzufügen weiterer Anpassungsstrategien basierend auf neuen Anforderungen.
-
----
+- **NeuralNetworkModule**: Keine spezifischen Implementierungen gefunden. Erweiterung geplant.
+- **Erweiterte ML-Modelle**: Zusätzliche Machine-Learning-Funktionen.
+- **Erweiterte Planungsfunktionen**: Fortgeschrittene Zielverfolgung und Management.
+- **API-Erweiterungen**: Neue Anpassungsstrategien und Protokollierungsmöglichkeiten.
