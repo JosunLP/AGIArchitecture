@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AGI.NeuralNetworkModule", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.NeuralNetworkModule", "AGI.NeuralNetworkModule\AGI.NeuralNetworkModule.csproj", "{EB066D91-FEC1-4E24-A421-E602BB9DF040}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.Tests", "AGI.Tests\AGI.Tests.csproj", "{C89CC830-0F4D-4E20-9E12-819D8D536F1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{EB066D91-FEC1-4E24-A421-E602BB9DF040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB066D91-FEC1-4E24-A421-E602BB9DF040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB066D91-FEC1-4E24-A421-E602BB9DF040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EB066D91-FEC1-4E24-A421-E602BB9DF040} = {13143DA0-709E-44DC-AEEC-8A547D251D1C}
