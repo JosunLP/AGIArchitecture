@@ -31,14 +31,17 @@ namespace AGI.MLServices
             }
 
             // Generating an explanation for the prediction
-            string explanation = $"The prediction is based on the following features:";
+            string explanation = $"The prediction is based on the following features:
+";
             foreach (var feature in features)
             {
                 double importance = GetFeatureImportance(feature.Key);
-                explanation += $"- Feature: {feature.Key}, Value: {feature.Value}, Importance Weight: {importance}";
+                explanation += $"- Feature: {feature.Key}, Value: {feature.Value}, Importance Weight: {importance}
+";
             }
 
-            explanation += $"Overall prediction score is: {predictionScore}";
+            explanation += $"Overall prediction score is: {predictionScore}
+";
             return explanation;
         }
 
