@@ -62,22 +62,39 @@ namespace AGI.PlanningEngine
         }
 
         // Evaluate and provide feedback after goal completion
-        public void EvaluateGoalCompletion(Goal completedGoal)
+        public static void EvaluateGoalCompletion(Goal completedGoal)
         {
             // Logic for feedback and adjustments based on completed goals
             Console.WriteLine($"Evaluating completion of goal: {completedGoal.Description}");
-            // Placeholder: Integrate with ReasoningEngine for analysis
+
+            // Placeholder: Integrate with ReasoningEngine for analysis using the updated ReasoningEngine
             try
             {
                 ReasoningEngine.ReasoningEngine reasoningEngine = new ReasoningEngine.ReasoningEngine();
-                var newPriority = reasoningEngine.AnalyzeGoalOutcome(completedGoal.Description);
-                completedGoal.Priority = newPriority;
+                // Use the ExplainInference method for goal evaluation
+                var explanation = reasoningEngine.ExplainInference(completedGoal.Description, "is related to", "outcome");
+
+                if (!string.IsNullOrEmpty(explanation))
+                {
+                    Console.WriteLine($"Reasoning Engine Explanation: {explanation}");
+                    completedGoal.Priority += 1; // Adjust priority based on positive reasoning
+                }
+                else
+                {
+                    completedGoal.Priority -= 1; // Default feedback if no meaningful inference can be made
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Warning: ReasoningEngine integration failed. Using default feedback logic.");
+                Console.WriteLine($"Warning: ReasoningEngine integration failed with error: {ex.Message}. Using default feedback logic.");
                 completedGoal.Priority -= 1; // Fallback logic for priority adjustment
             }
+        }
+
+        // List all goals in the queue
+        public IEnumerable<Goal> ListGoals()
+        {
+            return _goals;
         }
     }
 }

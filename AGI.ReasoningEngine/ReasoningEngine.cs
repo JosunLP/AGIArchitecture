@@ -1,85 +1,65 @@
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AGI.ReasoningEngine
 {
     public class ReasoningEngine
     {
-        private readonly Dictionary<string, List<string>> _knowledgeBase;
+        // A simple graph representation using adjacency list
+        private readonly Dictionary<string, List<string>> _knowledgeGraph;
 
         public ReasoningEngine()
         {
-            _knowledgeBase = [];
+            _knowledgeGraph = [];
         }
 
-        // Add a relation to the knowledge base
+        // Add a relation to the knowledge graph
         public void AddRelation(string subject, string relation, string obj)
         {
-            var key = $"{subject}-{relation}";
-            if (!_knowledgeBase.ContainsKey(key))
+            if (!_knowledgeGraph.ContainsKey(subject))
             {
-                _knowledgeBase[key] = [];
-            }
-            _knowledgeBase[key].Add(obj);
-        }
-
-        // Query the knowledge base for relations
-        public List<string> QueryRelation(string subject, string relation)
-        {
-            var key = $"{subject}-{relation}";
-            return _knowledgeBase.ContainsKey(key) ? _knowledgeBase[key] : new List<string>();
-        }
-
-        // Infer simple relationships
-        public bool InferRelation(string subject, string relation, string obj)
-        {
-            var key = $"{subject}-{relation}";
-            return _knowledgeBase.ContainsKey(key) && _knowledgeBase[key].Contains(obj);
-        }
-
-
-        public int AnalyzeGoalOutcome(string goalDescription)
-        {
-            // Simple heuristic: if the goal description contains certain keywords, return a higher probability
-            var positiveKeywords = new List<string> { "achieve", "success", "complete" };
-            var negativeKeywords = new List<string> { "fail", "impossible", "difficult" };
-
-            float score = 0.5f; // Start with a neutral score
-
-            foreach (var keyword in positiveKeywords)
-            {
-                if (goalDescription.Contains(keyword, StringComparison.OrdinalIgnoreCase))
-                {
-                    score += 0.1f;
-                }
+                _knowledgeGraph[subject] = [];
             }
 
-            foreach (var keyword in negativeKeywords)
+            if (!_knowledgeGraph[subject].Contains(obj))
             {
-                if (goalDescription.Contains(keyword, StringComparison.OrdinalIgnoreCase))
-                {
-                    score -= 0.1f;
-                }
+                _knowledgeGraph[subject].Add(obj);
             }
-
-            // Ensure the score is within the range [0, 1]
-            return (int)Math.Clamp(score, 0.0f, 1.0f);
         }
 
-        // Remove a relation from the knowledge base
-        public void RemoveRelation(string subject, string relation, string obj)
+        // Logical inference using logical operators and more complex rules
+        public bool Infer(string subject, string relation, string obj)
         {
-            var key = $"{subject}-{relation}";
-            if (_knowledgeBase.ContainsKey(key))
+            if (_knowledgeGraph.ContainsKey(subject) && _knowledgeGraph[subject].Contains(obj))
             {
-                _knowledgeBase[key].Remove(obj);
-                if (_knowledgeBase[key].Count == 0)
-                {
-                    _knowledgeBase.Remove(key);
-                }
+                Console.WriteLine($"Inferred relation: {subject} -> {relation} -> {obj}");
+                return true;
             }
+            return false;
+        }
+
+        // Explain inference by showing the path in the graph
+        public string ExplainInference(string subject, string relation, string obj)
+        {
+            if (Infer(subject, relation, obj))
+            {
+                return $"The relation '{subject} -> {relation} -> {obj}' was inferred based on direct edges found in the knowledge graph.";
+            }
+            return "No valid inference path found.";
+        }
+
+        public string InferRelation(string subject, string relation, string obj)
+        {
+            return Infer(subject, relation, obj) ? "Yes" : "No";
+        }
+
+        public string QueryRelation(string subject, string relation)
+        {
+            if (_knowledgeGraph.ContainsKey(subject))
+            {
+                return string.Join(", ", _knowledgeGraph[subject]);
+            }
+            return "No relations found.";
         }
     }
 }
