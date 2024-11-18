@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using AGI.Common;
 
 namespace AGI.DataManagement
 {
@@ -42,6 +43,12 @@ namespace AGI.DataManagement
         public async Task<List<Experience>> GetExperiencesAsync()
         {
             return await _context.Experiences.ToListAsync();
+        }
+
+        public async void SaveSensorData(SensorData data)
+        {
+            // Save sensor data as an Experience
+            await AddExperienceAsync(data.Data, data.Timestamp);
         }
     }
 }

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <SoftwareVersion>$(SoftwareVersion)</SoftwareVersion>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AGI.DataManagement\AGI.DataManagement.csproj" />
+    <ProjectReference Include="..\AGI.Adaptation\AGI.Adaptation.csproj" />
+    <ProjectReference Include="..\AGI.Common\AGI.Common.csproj" />
+  </ItemGroup>
+
+</Project>

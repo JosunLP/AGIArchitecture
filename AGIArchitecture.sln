@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.NeuralNetworkModule", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.Tests", "AGI.Tests\AGI.Tests.csproj", "{C89CC830-0F4D-4E20-9E12-819D8D536F1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGI.Sensors", "AGI.Sensors\AGI.Sensors.csproj", "{5FD1EEB2-011D-48EF-99DA-3A8DC74A5508}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,18 @@ Global
 		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C89CC830-0F4D-4E20-9E12-819D8D536F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D983FF3A-36D8-4F2C-AE5D-D8D138797820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D983FF3A-36D8-4F2C-AE5D-D8D138797820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D983FF3A-36D8-4F2C-AE5D-D8D138797820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D983FF3A-36D8-4F2C-AE5D-D8D138797820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4C28BCB-1390-4125-A4B5-418F38EF1A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4C28BCB-1390-4125-A4B5-418F38EF1A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4C28BCB-1390-4125-A4B5-418F38EF1A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4C28BCB-1390-4125-A4B5-418F38EF1A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD1EEB2-011D-48EF-99DA-3A8DC74A5508}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD1EEB2-011D-48EF-99DA-3A8DC74A5508}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD1EEB2-011D-48EF-99DA-3A8DC74A5508}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD1EEB2-011D-48EF-99DA-3A8DC74A5508}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EB066D91-FEC1-4E24-A421-E602BB9DF040} = {13143DA0-709E-44DC-AEEC-8A547D251D1C}
