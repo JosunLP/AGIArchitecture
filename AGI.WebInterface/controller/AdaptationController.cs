@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using AGI.NeuralNetworkModule;
 
 namespace AGI.WebInterface.Controller
@@ -73,11 +74,23 @@ namespace AGI.WebInterface.Controller
                 return BadRequest("Model name cannot be null or empty.");
             }
 
+            // Better path management and validation for model directory
             var modelDirectory = Path.Combine(AppContext.BaseDirectory, "models");
+            if (!Directory.Exists(modelDirectory))
+            {
+                return NotFound("The model directory does not exist. Please make sure the models have been saved correctly.");
+            }
+
+            var modelPath = Path.Combine(modelDirectory, $"{request.ModelName}.model");
+            if (!System.IO.File.Exists(modelPath))
+            {
+                return NotFound($"Model '{request.ModelName}' not found at path '{modelPath}'.");
+            }
+
             var model = _modelInference.LoadModel(request.ModelName, modelDirectory);
             if (model == null)
             {
-                return NotFound($"Model '{request.ModelName}' not found.");
+                return NotFound($"Model '{request.ModelName}' could not be loaded.");
             }
 
             var inputDataView = _modelInference.ConvertToIDataView(request.InputData);
