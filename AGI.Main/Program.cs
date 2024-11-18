@@ -1,64 +1,77 @@
+using System;
+using AGI.Adaptation;
+using AGI.APIIntegration;
+using AGI.DataManagement;
+using AGI.WebInterface;
 
-using AGI.ReasoningEngine;
-using AGI.PlanningEngine;
-using AGI.EthicsAndSafety;
-using AGI.SelfMonitoring;
-
-// Test Reasoning Engine
-var reasoningEngine = new ReasoningEngine();
-reasoningEngine.AddRelation("AI", "is a field of", "Computer Science");
-reasoningEngine.AddRelation("Machine Learning", "is a subset of", "AI");
-
-Console.WriteLine("Reasoning Engine Test:");
-Console.WriteLine($"AI is a field of Computer Science? {reasoningEngine.InferRelation("AI", "is a field of", "Computer Science")}");
-Console.WriteLine($"Machine Learning is a subset of AI? {reasoningEngine.InferRelation("Machine Learning", "is a subset of", "AI")}");
-Console.WriteLine($"Machine Learning is a field of Computer Science? {reasoningEngine.InferRelation("Machine Learning", "is a field of", "Computer Science")}");
-Console.WriteLine();
-
-// Test Planning Engine
-var planningEngine = new PlanningEngine();
-planningEngine.AddGoal("Learn basics of AI", priority: 1);
-planningEngine.AddGoal("Implement a machine learning model", priority: 2);
-planningEngine.AddGoal("Understand reasoning engines", priority: 3);
-
-Console.WriteLine("Planning Engine Test:");
-Console.WriteLine("Current Goals:");
-foreach (var goal in planningEngine.ListGoals())
+namespace AGI.Main
 {
-    Console.WriteLine($"- {goal.Description} (Priority: {goal.Priority}, Created: {goal.CreatedAt})");
-}
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to AGI.Main - Your Command Line Interface for AGI Management.");
 
-Console.WriteLine("\nFetching Next Goal:");
-var nextGoal = planningEngine.GetNextGoal();
-if (nextGoal != null)
-{
-    Console.WriteLine($"Next Goal: {nextGoal.Description} with priority {nextGoal.Priority}");
-}
-Console.WriteLine();
+            bool exit = false;
+            while (!exit)
+            {
+                Console.WriteLine("\nChoose an option:");
+                Console.WriteLine("1. Adaptation Module");
+                Console.WriteLine("2. API Integration");
+                Console.WriteLine("3. Data Management");
+                Console.WriteLine("4. Web Interface");
+                Console.WriteLine("5. Exit");
+                Console.Write("Enter your choice: ");
 
-// Test Ethics and Safety Module
-var ethicsSafetyModule = new EthicsAndSafetyModule();
-ethicsSafetyModule.AddEthicsRule("no harm");
-ethicsSafetyModule.AddSafetyRule("no data leakage");
+                string choice = Console.ReadLine() ?? string.Empty;
+                switch (choice)
+                {
+                    case "1":
+                        AdaptationModule();
+                        break;
+                    case "2":
+                        APIIntegrationModule();
+                        break;
+                    case "3":
+                        DataManagementModule();
+                        break;
+                    case "4":
+                        WebInterfaceModule();
+                        break;
+                    case "5":
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+        }
 
-Console.WriteLine("Ethics and Safety Module Test:");
-string action1 = "Data analysis with no harm";
-string action2 = "Send data with possible data leakage";
-Console.WriteLine($"Action: {action1} complies with ethics? {ethicsSafetyModule.CheckEthicsCompliance(action1)}");
-Console.WriteLine($"Action: {action1} complies with safety? {ethicsSafetyModule.CheckSafetyCompliance(action1)}");
-Console.WriteLine($"Action: {action2} complies with ethics? {ethicsSafetyModule.CheckEthicsCompliance(action2)}");
-Console.WriteLine($"Action: {action2} complies with safety? {ethicsSafetyModule.CheckSafetyCompliance(action2)}");
-Console.WriteLine();
+        static void AdaptationModule()
+        {
+            Console.WriteLine("\nAdaptation Module Selected.");
+            // Code to initiate and manage adaptation processes using AGI.Adaptation
+        }
 
-// Test Self-Monitoring Module
-var selfMonitoringModule = new SelfMonitoringModule();
-selfMonitoringModule.Log("System started");
-selfMonitoringModule.Log("Data analysis completed without issues");
-selfMonitoringModule.Log("An attempt was made to send data with potential data leakage");
+        static void APIIntegrationModule()
+        {
+            Console.WriteLine("\nAPI Integration Module Selected.");
+            using var httpClient = new HttpClient();
+            ExtendedAPIIntegrationService apiService = new(httpClient);
+            apiService.RunIntegration();
+        }
 
-Console.WriteLine("Self-Monitoring Module Test:");
-Console.WriteLine("Logs:");
-foreach (var log in selfMonitoringModule.GetLogs())
-{
-    Console.WriteLine(log);
+        static void DataManagementModule()
+        {
+            Console.WriteLine("\nData Management Module Selected.");
+            // Code to handle data management using AGI.DataManagement
+        }
+
+        static void WebInterfaceModule()
+        {
+            Console.WriteLine("\nWeb Interface Module Selected.");
+            // Code to interact with AGI.WebInterface
+        }
+    }
 }

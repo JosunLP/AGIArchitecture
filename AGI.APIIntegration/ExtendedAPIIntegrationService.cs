@@ -58,5 +58,60 @@ namespace AGI.APIIntegration
             // Process weather data for ML or reasoning (placeholder)
             Console.WriteLine("Processing weather data...");
         }
+
+        public void RunIntegration()
+         {
+            bool exit = false;
+            while (!exit)
+            {
+                Console.WriteLine("\nChoose an option:");
+                Console.WriteLine("1. Fetch Financial Data");
+                Console.WriteLine("2. Fetch Weather Data");
+                Console.WriteLine("3. Automated Data Retrieval");
+                Console.WriteLine("4. Exit");
+                Console.Write("Enter your choice: ");
+
+                string? choice = Console.ReadLine();
+                if (choice == null)
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                    continue;
+                }
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Enter stock symbol (e.g., AAPL): ");
+                        string? stockSymbol = Console.ReadLine();
+                        if (string.IsNullOrEmpty(stockSymbol))
+                        {
+                            Console.WriteLine("Invalid input. Please try again.");
+                            continue;
+                        }
+                        var financialData = FetchFinancialDataAsync(stockSymbol).Result;
+                        Console.WriteLine(financialData);
+                        break;
+                    case "2":
+                        Console.Write("Enter city (e.g., Berlin): ");
+                        string? city = Console.ReadLine();
+                        if (string.IsNullOrEmpty(city))
+                        {
+                            Console.WriteLine("Invalid input. Please try again.");
+                            continue;
+                        }
+                        var weatherData = FetchWeatherDataAsync(city).Result;
+                        Console.WriteLine(weatherData);
+                        break;
+                    case "3":
+                        FetchAndProcessExternalData().Wait();
+                        break;
+                    case "4":
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+            }
+         }
     }
 }

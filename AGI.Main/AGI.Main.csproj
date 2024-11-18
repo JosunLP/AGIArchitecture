@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +18,10 @@
     <ProjectReference Include="..\AGI.PlanningEngine\AGI.PlanningEngine.csproj" />
     <ProjectReference Include="..\AGI.EthicsAndSafety\AGI.EthicsAndSafety.csproj" />
     <ProjectReference Include="..\AGI.SelfMonitoring\AGI.SelfMonitoring.csproj" />
+    <ProjectReference Include="..\AGI.Common\AGI.Common.csproj" />
+    <ProjectReference Include="..\AGI.Adaptation\AGI.Adaptation.csproj" />
+    <ProjectReference Include="..\AGI.APIIntegration\AGI.APIIntegration.csproj" />
+    <ProjectReference Include="..\AGI.WebInterface\AGI.WebInterface.csproj" />
   </ItemGroup>
 
 </Project>
