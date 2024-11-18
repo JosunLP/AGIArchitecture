@@ -1,40 +1,85 @@
 
 using Microsoft.AspNetCore.Mvc;
-using AGI.Adaptation;
-using AGI.SelfMonitoring;
 using System.Collections.Generic;
+using AGI.NeuralNetworkModule;
 
-namespace AGI.WebInterface.Controllers
+namespace AGI.WebInterface.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AdaptationController(AdaptationModule adaptationModule, SelfMonitoringModule selfMonitoringModule) : ControllerBase
+    public class AdaptationController : ControllerBase
     {
-        private readonly AdaptationModule _adaptationModule = adaptationModule;
-        private readonly SelfMonitoringModule _selfMonitoringModule = selfMonitoringModule;
+        private readonly ModelTraining _modelTraining;
+        private readonly ModelInference _modelInference;
 
-        // Endpoint to list all available adaptation strategies
-        [HttpGet("available-strategies")]
-        public IActionResult GetAvailableStrategies()
+        public AdaptationController()
         {
-            var strategies = _adaptationModule.GetAvailableStrategies();
-            return Ok(strategies);
+            _modelTraining = new ModelTraining();
+            _modelInference = new ModelInference();
         }
 
-        // Endpoint to apply a specific adaptation strategy
-        [HttpPost("apply-strategy")]
-        public IActionResult ApplyAdaptationStrategy([FromQuery] string strategyName)
+        // Endpoint to train a model
+        [HttpPost("train")]
+        public IActionResult TrainModel([FromBody] TrainModelRequest request)
         {
-            _adaptationModule.ApplyAdaptation(strategyName);
-            return Ok($"Adaptation strategy '{strategyName}' applied successfully.");
+            if (request.Data == null || request.Labels == null || request.Data.Count != request.Labels.Count)
+            {
+                return BadRequest("Invalid training data or labels.");
+            }
+
+            _modelTraining.TrainModel(request.Data, request.Labels, request.Epochs, request.LearningRate.ToString());
+            return Ok($"Model '{request.ModelName}' has been trained and saved successfully.");
         }
 
-        // Endpoint to fetch logs from self-monitoring to observe adaptations
-        [HttpGet("logs")]
-        public IActionResult GetAdaptationLogs()
+        // Endpoint to perform inference
+        [HttpPost("predict")]
+        public IActionResult Predict([FromBody] PredictRequest request)
         {
-            var logs = _selfMonitoringModule.GetLogs();
-            return Ok(logs);
+            if (request.InputData == null)
+            {
+                return BadRequest("Invalid input data.");
+            }
+            var modelDirectory = Path.Combine(AppContext.BaseDirectory, "models");
+            if (string.IsNullOrEmpty(request.ModelName))
+            {
+                return BadRequest("Model name cannot be null or empty.");
+            }
+            var model = _modelInference.LoadModel(request.ModelName, modelDirectory);
+            if (model == null)
+            {
+                return NotFound($"Model '{request.ModelName}' not found.");
+            }
+
+            var inputDataView = _modelInference.ConvertToIDataView(request.InputData);
+            var predictions = _modelInference.Predict(model, inputDataView);
+            if (predictions == null || !predictions.Any())
+            {
+                return NotFound($"Model '{request.ModelName}' not found.");
+            }
+
+            var prediction = predictions.FirstOrDefault()?.Score.FirstOrDefault() ?? -1;
+            if (prediction == -1)
+            {
+                return NotFound($"Model '{request.ModelName}' not found.");
+            }
+
+            return Ok(new { Prediction = prediction });
         }
+    }
+
+    // Request classes for model training and inference
+    public class TrainModelRequest
+    {
+        public List<float[]>? Data { get; set; }
+        public List<float>? Labels { get; set; }
+        public int Epochs { get; set; }
+        public float LearningRate { get; set; }
+        public string? ModelName { get; set; }
+    }
+
+    public class PredictRequest
+    {
+        public float[]? InputData { get; set; }
+        public string? ModelName { get; set; }
     }
 }
