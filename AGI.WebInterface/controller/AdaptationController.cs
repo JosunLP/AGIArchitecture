@@ -12,19 +12,46 @@ namespace AGI.WebInterface.Controller
         private readonly ModelTraining _modelTraining;
         private readonly ModelInference _modelInference;
 
-        public AdaptationController()
+        // Constructor uses Dependency Injection to receive ModelTraining and ModelInference instances
+        public AdaptationController(ModelTraining modelTraining, ModelInference modelInference)
         {
-            _modelTraining = new ModelTraining();
-            _modelInference = new ModelInference();
+            _modelTraining = modelTraining;
+            _modelInference = modelInference;
         }
 
         // Endpoint to train a model
         [HttpPost("train")]
         public IActionResult TrainModel([FromBody] TrainModelRequest request)
         {
-            if (request.Data == null || request.Labels == null || request.Data.Count != request.Labels.Count)
+            // Enhanced input validation
+            if (request.Data == null || request.Labels == null)
             {
-                return BadRequest("Invalid training data or labels.");
+                return BadRequest("Training data or labels cannot be null.");
+            }
+
+            if (request.Data.Count == 0 || request.Labels.Count == 0)
+            {
+                return BadRequest("Training data or labels cannot be empty.");
+            }
+
+            if (request.Data.Count != request.Labels.Count)
+            {
+                return BadRequest("The number of data entries must match the number of labels.");
+            }
+
+            if (request.Epochs <= 0)
+            {
+                return BadRequest("Epochs must be greater than 0.");
+            }
+
+            if (request.LearningRate <= 0 || request.LearningRate > 1)
+            {
+                return BadRequest("Learning rate must be between 0 and 1 (exclusive).");
+            }
+
+            if (string.IsNullOrEmpty(request.ModelName))
+            {
+                return BadRequest("Model name cannot be null or empty.");
             }
 
             _modelTraining.TrainModel(request.Data, request.Labels, request.Epochs, request.LearningRate.ToString());
@@ -35,15 +62,18 @@ namespace AGI.WebInterface.Controller
         [HttpPost("predict")]
         public IActionResult Predict([FromBody] PredictRequest request)
         {
-            if (request.InputData == null)
+            // Enhanced input validation
+            if (request.InputData == null || request.InputData.Length == 0)
             {
-                return BadRequest("Invalid input data.");
+                return BadRequest("Input data cannot be null or empty.");
             }
-            var modelDirectory = Path.Combine(AppContext.BaseDirectory, "models");
+
             if (string.IsNullOrEmpty(request.ModelName))
             {
                 return BadRequest("Model name cannot be null or empty.");
             }
+
+            var modelDirectory = Path.Combine(AppContext.BaseDirectory, "models");
             var model = _modelInference.LoadModel(request.ModelName, modelDirectory);
             if (model == null)
             {
@@ -54,13 +84,13 @@ namespace AGI.WebInterface.Controller
             var predictions = _modelInference.Predict(model, inputDataView);
             if (predictions == null || !predictions.Any())
             {
-                return NotFound($"Model '{request.ModelName}' not found.");
+                return NotFound($"No predictions were made using model '{request.ModelName}'.");
             }
 
             var prediction = predictions.FirstOrDefault()?.Score.FirstOrDefault() ?? -1;
             if (prediction == -1)
             {
-                return NotFound($"Model '{request.ModelName}' not found.");
+                return NotFound($"Failed to get a prediction for model '{request.ModelName}'.");
             }
 
             return Ok(new { Prediction = prediction });
