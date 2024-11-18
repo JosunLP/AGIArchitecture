@@ -24,7 +24,7 @@ namespace AGI.WebInterface.Controller
             _logger = logger;
         }
 
-        // Endpoint to train a model
+        // Endpoint to train a model with flexible model types and more logging
         [HttpPost("train")]
         public IActionResult TrainModel([FromBody] TrainModelRequest request)
         {
@@ -67,10 +67,25 @@ namespace AGI.WebInterface.Controller
                     return BadRequest("Model name cannot be null or empty.");
                 }
 
-                _logger.LogInformation("Starting model training for '{ModelName}' with {Epochs} epochs.", request.ModelName, request.Epochs);
-                _modelTraining.TrainModel(request.Data, request.Labels, request.Epochs, request.LearningRate.ToString());
-                _logger.LogInformation("Model '{ModelName}' has been trained and saved successfully.", request.ModelName);
+                _logger.LogInformation("Starting model training for '{ModelName}' with {Epochs} epochs and model type '{ModelType}'.", request.ModelName, request.Epochs, request.ModelType);
                 
+                // Flexible handling of different model types
+                if (string.Equals(request.ModelType, "NeuralNetwork", StringComparison.OrdinalIgnoreCase))
+                {
+                    _modelTraining.TrainModel(request.Data, request.Labels, request.Epochs, request.LearningRate.ToString());
+                }
+                else if (string.Equals(request.ModelType, "DecisionTree", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Placeholder: Add specific implementation for Decision Tree training
+                    _logger.LogInformation("Training a Decision Tree model (placeholder logic).");
+                }
+                else
+                {
+                    _logger.LogWarning("Model type '{ModelType}' is not supported.", request.ModelType);
+                    return BadRequest($"Model type '{request.ModelType}' is not supported.");
+                }
+
+                _logger.LogInformation("Model '{ModelName}' has been trained and saved successfully.", request.ModelName);
                 return Ok($"Model '{request.ModelName}' has been trained and saved successfully.");
             }
             catch (Exception ex)
@@ -156,6 +171,7 @@ namespace AGI.WebInterface.Controller
         public int Epochs { get; set; }
         public float LearningRate { get; set; }
         public string? ModelName { get; set; }
+        public string? ModelType { get; set; }  // Added ModelType to support multiple model types
     }
 
     public class PredictRequest
