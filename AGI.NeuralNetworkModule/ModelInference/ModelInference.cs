@@ -27,8 +27,8 @@ namespace AGI.NeuralNetworkModule
 
         public class PredictionResult
         {
-            public float[] Score { get; set; }
-            public string PredictedLabel { get; set; }
+            public float[] Score { get; set; } = [];
+            public string PredictedLabel { get; set; } = string.Empty;
         }
     }
 }
