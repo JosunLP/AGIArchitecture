@@ -95,7 +95,7 @@ namespace AGI.NeuralNetworkModule
             var testDataList = new List<TrainingData>();
             for (int i = 0; i < testData.Count; i++)
             {
-            testDataList.Add(new TrainingData { Features = testData[i], Label = testLabels[i] });
+                testDataList.Add(new TrainingData { Features = testData[i], Label = testLabels[i] });
             }
 
             // Convert the list to an IDataView

@@ -60,7 +60,7 @@ namespace AGI.APIIntegration
         }
 
         public void RunIntegration()
-         {
+        {
             bool exit = false;
             while (!exit)
             {
@@ -112,6 +112,6 @@ namespace AGI.APIIntegration
                         break;
                 }
             }
-         }
+        }
     }
 }
