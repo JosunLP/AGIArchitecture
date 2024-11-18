@@ -10,7 +10,7 @@ namespace AGI.SelfMonitoring
 
         public SelfHealingMechanism()
         {
-            HealingActions = [];
+            HealingActions = new Dictionary<string, Func<bool>>();
         }
 
         public void RegisterHealingAction(string issue, Func<bool> action)
